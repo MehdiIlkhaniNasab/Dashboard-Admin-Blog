@@ -11,4 +11,6 @@
     --color-dark-1: #5d5a5f; /* Title Text Color */
     --font-primary: 'shabnam';
     --font-size-primary: '1.6rem';
+    --box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    --border-radius: 5px;
 }

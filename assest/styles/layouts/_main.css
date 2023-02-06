@@ -1,0 +1,9 @@
+main{
+    margin-top: 2rem;
+}
+
+.main-wrapper{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
