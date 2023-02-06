@@ -1,0 +1,14 @@
+:root{
+    --color-gray-0: #f7f3fe; /* Background Color */
+    --color-gray-1: #faf7f9;
+    --color-gray-2: #d9d6de; /* Border */
+    --color-gray-3: #94939a; /* Placeholder Text Color */
+    --color-blue-0: #739af7; /* Btns */
+    --color-blue-1: #a6bfd7; 
+    --color-white: #ffffff;
+    --color-black: #000;
+    --color-dark-0: #625e6a; /* Text Color */
+    --color-dark-1: #5d5a5f; /* Title Text Color */
+    --font-primary: 'shabnam';
+    --font-size-primary: '1.6rem';
+}
