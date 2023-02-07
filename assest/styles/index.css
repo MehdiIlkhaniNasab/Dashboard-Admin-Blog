@@ -8,6 +8,7 @@
 /* Components */
 @import url(components/_btns.css);
 @import url(components/_inputs.css);
+@import url(components/_ckEditor.css);
 
 /* Layout */
 @import url(layouts/_header.css);

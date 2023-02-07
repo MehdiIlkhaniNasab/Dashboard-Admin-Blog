@@ -1,0 +1,4 @@
+.ck-reset_all :not(.ck-reset_all-excluded *), .ck.ck-reset, .ck.ck-reset_all {
+    background: var(--color-gray-0);
+    text-align: right;
+}

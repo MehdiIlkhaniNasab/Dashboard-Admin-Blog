@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <div class="header-left">
-                    <div class="search-box">
+                    <div class="search-box input-fileld">
                         <input type="text" name="" id="" placeholder="جستجو کنید ..." class="input">
                         <button class="btn btn-blue">جستجو</button>
                     </div>
@@ -128,7 +128,17 @@
 
                 <section class="main-content">
                     <div class="main-content-wrapper">
-                        <div class="main-content-top"></div>
+                        <div class="main-content-top">
+                            <div class="main-content-title">
+                                <h2 class="">عنوان مقاله</h2>
+                            </div>
+                            <div class="main-content-input input-fileld">
+                                <input type="text" name="" id="" class="input " placeholder="ایجاد مقاله جدید" >
+                            </div>
+                            <div class="main-content-editor">
+                                <div id="editor"></div>
+                            </div>
+                        </div>
                         <div class="main-content-bottom"></div>
                     </div>
                 </section>
@@ -140,6 +150,7 @@
                             <h2 class="">انتشار پست</h2>
                         </div>
                         <div class="aside-left-content">
+
                             <div class="select-box">
                                 <div class="select-box-item">
                                     <span>
@@ -169,23 +180,52 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="aside-left-btns">
                                 <button class="btn btn-blue">اعمال تغییرات</button>
                             </div>
+
                         </div>
                     </article>
                     <article class="aside-box aside-middle">
                         <div class="aside-left-title">
                             <h2 class="">دسته بندی ها</h2>
                         </div>
-                        <div class="aside-left-content"></div>
+                        <div class="aside-left-content">
+                            <div class="category-box">
+                                <div class="category-box-title">
+                                    <div class="category-box-title-right">
+                                        <a href="" class="active">همه</a>
+                                    </div>
+                                    <div class="category-box-title-left"> <!-- add active calss to enable btn -->
+                                        <a href="#" class="">استفاده نشده</a>
+                                    </div>
+                                </div>
+                                <div class="category-box-content">
+                                    <div class="category-list">
+                                        <div class="category-item">
+                                            <input type="checkbox" name="" id="category-input">
+                                            <label for="category-input">دسته بندی وجود ندارد</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="category-btns">
+                                <a href="#" class="">دسته بندی جدید</a>
+                            </div>
+
+                        </div>
 
                     </article>
                     <article class="aside-box aside-bottom">
                         <div class="aside-left-title">
                             <h2 class="">عکس شاخص</h2>
                         </div>
-                        <div class="aside-left-content"></div>
+                        <div class="aside-left-content">
+                            <div class="index-photo">
+                                <a href="" class="">انتخاب عکس شاخص</a>
+                            </div>
+                        </div>
 
                     </article>
                 </aside>
@@ -193,6 +233,9 @@
         </div>
     </main>
 
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+    <script type="module" src="assest/js/post.js"></script>
 </body>
 
 </html>

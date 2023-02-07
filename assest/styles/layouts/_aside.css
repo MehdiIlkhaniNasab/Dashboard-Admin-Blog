@@ -113,6 +113,91 @@ aside{
     width: 100%;
 }
 
+.category-box{
+    width: 100%;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-gray-2);
+    border-radius: var(--border-radius);
+    height: auto;
+}
+
+.category-box-title{
+    width: 100%;
+    height: 5rem;
+    border-bottom: 1px solid var(--color-gray-2);
+    background-color: var(--color-gray-0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.category-box-title  >div{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.category-box-title-right a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 3rem;
+    height: 100%;
+    border: none;
+    outline: none;
+    border-radius: var(--border-radius);
+}
+.category-box-title-right a.active{
+    padding: 0 3rem;
+    height: 100%;
+    border: none;
+    outline: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    background-color: var(--color-blue-2);
+    color: var(--color-white);
+    position: relative;
+    overflow: hidden;
+}
+
+.category-list{
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.category-item{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.5rem;
+}
+
+.category-item input{
+    accent-color: var(--color-blue-2);
+}
+
+.category-btns{
+    padding: 1rem 0;
+    color: var(--color-blue-2);
+}
+
+
+
+.index-photo{
+    padding: 1rem 0;
+    color: var(--color-blue-2);
+}
+
+
 /* Aside Right */
 .aside-right{
     padding: 0 1rem;
@@ -167,22 +252,12 @@ aside{
     width: 60px;
     height: 60px;
     font-size: 1.8rem;
-    background-color: blue;
     border-radius: var(--border-radius);
+    background-color: var(--color-gray-0);
+    color: var(--color-blue-2);
 }
 
-.aside-right-top span:nth-child(1){
-    background-color: var(--color-blue-1);
-    color: var(--color-white);
-}
-.aside-right-top span:nth-child(2){
-    background-color: var(--color-orange-1);
-    color: var(--color-white);
-}
-.aside-right-top span:nth-child(3){
-    background-color: var(--color-green-1);
-    color: var(--color-white);
-}
+
 
 .aside-right-menu{
     width: 100%;
@@ -248,7 +323,7 @@ aside{
 
 .aside-right-item.active span:first-child{
     display: inline-block;
-    padding: 1rem 1.5rem;
+    padding: 0.75rem 1.1rem;
     background-color: var(--color-blue-2);
     border-radius: 50%;
     color: var(--color-white);
@@ -256,7 +331,7 @@ aside{
 .aside-right-item.active span:last-child{
     display: flex;
     align-items: center;
-    padding: 1rem 1.5rem;
+    padding: 0.75rem 1.1rem;
     background-color: var(--color-blue-2);
     border-radius: 6px;
     color: var(--color-white);

@@ -1,3 +1,11 @@
+.input-fileld{
+    background-color: var(--color-white);
+    border-radius: var(--border-radius);
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
 .input{
     height: 100%;
     padding: 0 1rem;
@@ -5,6 +13,8 @@
     border: none;
     flex-grow: 1;
 }
+
+
 
 .input::placeholder{
     color: var(--color-gray-3);
