@@ -1,0 +1,11 @@
+.input{
+    height: 100%;
+    padding: 0 1rem;
+    outline: none;
+    border: none;
+    flex-grow: 1;
+}
+
+.input::placeholder{
+    color: var(--color-gray-3);
+}

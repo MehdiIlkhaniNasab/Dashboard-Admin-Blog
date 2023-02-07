@@ -38,13 +38,18 @@ textarea::placeholder{
 
 button{
   cursor: pointer;
+  font-size: inherit;
+  font-family: inherit;
 }
 
 img,
 video,
 canvas,
 svg{
-  max-width: 100%;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 a{

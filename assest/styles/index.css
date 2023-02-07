@@ -1,10 +1,13 @@
 /* Base */
-@import url(base/_variable.css);
 @import url(base/_reset.css);
-@import url(base/_font-face.css);
 @import url(base/_typography.css);
+@import url(base/_font-face.css);
+@import url(base/_variable.css);
 @import url(base/_utilities.css);
 
+/* Components */
+@import url(components/_btns.css);
+@import url(components/_inputs.css);
 
 /* Layout */
 @import url(layouts/_header.css);

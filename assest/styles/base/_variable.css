@@ -5,12 +5,19 @@
     --color-gray-3: #94939a; /* Placeholder Text Color */
     --color-blue-0: #739af7; /* Btns */
     --color-blue-1: #a6bfd7; 
+    --color-blue-2: #0344b2; 
+    --color-purple-0: #4211ce; 
+    --color-orange-0: #f96b00; 
+    --color-orange-1: #FBC490; 
+    --color-green-0: #1fbd38; 
+    --color-green-1: #A3EBB1; 
     --color-white: #ffffff;
     --color-black: #000;
     --color-dark-0: #625e6a; /* Text Color */
     --color-dark-1: #5d5a5f; /* Title Text Color */
     --font-primary: 'shabnam';
-    --font-size-primary: '1.6rem';
+    --font-size-primary: 1.6rem;
     --box-shadow: 0 0 20px rgba(0,0,0,0.2);
     --border-radius: 5px;
+    --transition: all 0.5s;
 }
