@@ -20,19 +20,17 @@ header {
     display: flex;
     align-items: center;
     gap: 1rem;
-
 }
 
 .header-logo {
-    width: 15%;
-    height: 100%;
+    width: 7rem;
+    height: 7rem;
     border-radius: 50%;
     overflow: hidden;
     box-shadow: var(--box-shadow);
 }
 
 .header-text {
-    flex-grow: 1;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -41,14 +39,15 @@ header {
 }
 
 
-.header-text h3{
+.header-text h3 {
     font-size: 1.8rem;
 }
 
-.header-text h6{
+.header-text h6 {
     font-size: 1.4rem;
     opacity: 0.5;
 }
+
 .header-left {
     height: 100%;
     width: 50%;
@@ -69,5 +68,43 @@ header {
     flex-grow: 1;
     height: 100%;
     box-shadow: var(--box-shadow);
-
 }
+
+@media only screen and (max-width: 75em) {
+    html {
+        font-size: 50%;
+    }
+  
+}
+@media only screen and (max-width: 62em) {
+    .header-wrapper {
+        height: auto;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .header-right {
+        width: 60%;
+        justify-content: center;
+        align-items: center;
+    }
+    .header-left {
+        height: 15rem;
+        width: 100%;
+        flex-direction: column;
+    }
+    .search-box {
+        width: 60%;
+        height: 100%;
+        box-shadow: var(--box-shadow);
+    }
+    
+}
+@media only screen and (max-width: 48em) {
+    .header-right {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+}
+@media only screen and (max-width: 36em) {}
