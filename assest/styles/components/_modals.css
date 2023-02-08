@@ -1,0 +1,94 @@
+.modal {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    overflow-y: auto;
+    padding-top: 5rem;
+    opacity: 0;
+    visibility: hidden;
+    z-index: -1;
+    transition: var(--transition);
+}
+
+.modal.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 1;
+}
+
+.modal-container {
+    width: 80%;
+    height: auto;
+    background-color: var(--color-gray-0);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+}
+
+.modal-title {
+    height: 6rem;
+    width: 100%;
+    background-color: var(--color-white);
+    border-bottom: 1px solid var(--color-gray-2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.modal-title svg {
+    width: 2.5rem;
+    height: 2.5rem;
+    fill: var(--color-red-0);
+    cursor: pointer;
+}
+
+.modal-content {
+    padding: 2rem;
+
+}
+
+.nav-box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.nav-tabs {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--color-gray-2);
+}
+
+.nav-item {
+    padding: 1rem;
+}
+
+.nav-item.active {
+    border: 1px solid var(--color-gray-2);
+    border-bottom: none;
+    background-color: var(--color-white);
+    border-radius: var(--border-radius);
+}
+
+.tab-content {
+    background-color: var(--color-white);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+}
+
+.tab-pane {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}

@@ -9,9 +9,14 @@
 @import url(components/_btns.css);
 @import url(components/_inputs.css);
 @import url(components/_ckEditor.css);
+@import url(components/_modals.css);
 
 /* Layout */
 @import url(layouts/_header.css);
 @import url(layouts/_main.css);
 @import url(layouts/_main-content.css);
 @import url(layouts/_aside.css);
+
+
+/* Pages */
+@import url(pages/_post-blog.css);

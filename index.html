@@ -133,13 +133,65 @@
                                 <h2 class="">عنوان مقاله</h2>
                             </div>
                             <div class="main-content-input input-fileld">
-                                <input type="text" name="" id="" class="input " placeholder="ایجاد مقاله جدید" >
+                                <input type="text" name="" id="" class="input " placeholder="ایجاد مقاله جدید">
                             </div>
                             <div class="main-content-editor">
                                 <div id="editor"></div>
                             </div>
                         </div>
-                        <div class="main-content-bottom"></div>
+                        <div class="main-content-bottom">
+                            <div class="main-content-title">
+                                <h2 class="">گالری عکس</h2>
+                                <div class="custome-input-file">
+                                    <input type="file" name="" id="input-file">
+                                    <label for="input-file" class="btn btn-blue">
+                                        انتخاب عکس های گالری
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="main-content-images">
+                                <figure class="main-content-imgage">
+                                    <img src="assest/images/blog/634-540x350.jpg" alt="">
+                                    <div class="main-content-image-delete">
+                                        <span>
+                                            <svg class="icon icon-cancel">
+                                                <use xlink:href="assest/images/svg/defs.svg#icon-cancel"></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </figure>
+                                <figure class="main-content-imgage">
+                                    <img src="assest/images/blog/663-540x350.jpg" alt="">
+                                    <div class="main-content-image-delete">
+                                        <span>
+                                            <svg class="icon icon-cancel">
+                                                <use xlink:href="assest/images/svg/defs.svg#icon-cancel"></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </figure>
+                                <figure class="main-content-imgage">
+                                    <img src="assest/images/blog/605-540x350.jpg" alt="">
+                                    <div class="main-content-image-delete">
+                                        <span>
+                                            <svg class="icon icon-cancel">
+                                                <use xlink:href="assest/images/svg/defs.svg#icon-cancel"></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </figure>
+                                <figure class="main-content-imgage">
+                                    <img src="assest/images/blog/602-540x350.jpg" alt="">
+                                    <div class="main-content-image-delete">
+                                        <span>
+                                            <svg class="icon icon-cancel">
+                                                <use xlink:href="assest/images/svg/defs.svg#icon-cancel"></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </figure>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
@@ -162,16 +214,16 @@
                                 </div>
                                 <div class="select-box-menu "> <!-- Add active class to visiable menu -->
                                     <div class="select-box-menu-item">
-                                        <span> 
+                                        <span>
                                             <svg class="icon icon-tags">
                                                 <use xlink:href="assest/images/svg/defs.svg#icon-tags"></use>
                                             </svg>
                                         </span>
                                         <span>پیش نویس</span>
                                     </div>
-                              
+
                                     <div class="select-box-menu-item">
-                                        <span> 
+                                        <span>
                                             <svg class="icon icon-checkmark">
                                                 <use xlink:href="assest/images/svg/defs.svg#icon-checkmark"></use>
                                             </svg>
@@ -234,7 +286,70 @@
     </main>
 
 
-    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+    <!-- Modals -->
+    <div class="modal">
+        <div class="modal-container">
+            <div class="modal-title">
+                <h2 class="">گالری عکس و فیلم</h2>
+                <span>
+                    <svg class="icon icon-cancel">
+                        <use xlink:href="assest/images/svg/defs.svg#icon-cancel"></use>
+                    </svg>
+                </span>
+            </div>
+            <div class="modal-content">
+                <div class="nav-box">
+                    <ul class="nav nav-tabs" id="MyTab">
+                        <li class="nav-item active" data-target="">
+                            <a href="#" class="nav-link ">کتاب خونه پرونده های چند رسانه</a>
+                        </li>
+                        <li class="nav-item" data-target="">
+                            <a href="#" class="nav-link">بارگذاری پرونده های چند رسانه</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane active"></div>
+                        <div class="tab-pane">
+                            <div class="images-box">
+                                <figure class="image-box active">
+                                    <img src="assest/images/blog/605-540x350.jpg" alt="">
+                                </figure>
+                                <figure class="image-box">
+                                    <img src="assest/images/blog/605-540x350.jpg" alt="">
+                                </figure>
+                                <figure class="image-box">
+                                    <img src="assest/images/blog/605-540x350.jpg" alt="">
+                                </figure>
+                                <figure class="image-box">
+                                    <img src="assest/images/blog/605-540x350.jpg" alt="">
+                                </figure>
+                            </div>
+                            <form action="#" class="form">
+                                <div class="input-box">
+                                    <label for="">عنوان</label>
+                                    <input type="text" class="form-control" placeholder="عنوان عکس">
+                                </div>
+                                <div class="input-box">
+                                    <label for="">متن alt عکس</label>
+                                    <input type="text" class="form-control" placeholder="متن alt عکس">
+                                </div>
+                                <div class="input-box">
+                                    <label for="">توضیحات</label>
+                                    <textarea name="" id="" cols="30" rows="10" class="form-control"
+                                        placeholder="توضیحات عکس"></textarea>
+                                </div>
+                                <div class="form-btns">
+                                    <button class="btn btn-blue">تنظیم عکس شاخص</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assest/js/lib/ckeditor.js"></script>
     <script type="module" src="assest/js/post.js"></script>
 </body>
 
