@@ -347,15 +347,15 @@
             <div class="modal-content">
                 <div class="nav-box">
                     <ul class="nav nav-tabs" id="MyTab">
-                        <li class="nav-item " data-target="store-image">
+                        <li class="nav-item active" data-target="store-image">
                             <a href="#" class="nav-link ">کتاب خونه پرونده های چند رسانه</a>
                         </li>
-                        <li class="nav-item active"  data-target="upload-image">
+                        <li class="nav-item "  data-target="upload-image">
                             <a href="#" class="nav-link">بارگذاری پرونده های چند رسانه</a>
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane " id="store-image">
+                        <div class="tab-pane active" id="store-image">
                             <div class="images-box">
                                 <figure class="image-box">
                                     <img src="assest/images/blog/605-540x350.jpg" alt="">
@@ -389,26 +389,13 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="tab-pane active" id="upload-image">
-                            <div class="images-box">
-                                <figure class="image-box">
-                                    <img src="assest/images/blog/605-540x350.jpg" alt="">
-                                </figure>
-                                <figure class="image-box">
-                                    <img src="assest/images/blog/605-540x350.jpg" alt="">
-                                </figure>
-                                <figure class="image-box">
-                                    <img src="assest/images/blog/605-540x350.jpg" alt="">
-                                </figure>
-                                <figure class="image-box">
-                                    <img src="assest/images/blog/605-540x350.jpg" alt="">
-                                </figure>
-                            </div>
+                        <div class="tab-pane " id="upload-image">
+                           
                             <div class="upload-new-image">
                                 <h2 class="">بارگذاری پرونده های چند رسانه ای</h2>
                                 <div class="custome-input-file">
-                                    <label for="upload-image" class="btn btn-blue">بارگذاری فایل</label>
-                                    <input type="file" name="" id="upload-image" class="upload-image">
+                                    <label for="upload-image-btn" class="btn btn-blue">بارگذاری فایل</label>
+                                    <input type="file" name="" id="upload-image-btn" class="upload-image">
                                 </div>
                             </div>
                         </div>
@@ -417,8 +404,10 @@
             </div>
         </div>
     </div>
-
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="assest/js/lib/ckeditor.js"></script>
+    <script src="assest/js/lib/sweetalert2.js"></script>
     <script type="module" src="assest/js/post.js"></script>
 </body>
 

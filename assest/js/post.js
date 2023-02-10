@@ -1,17 +1,24 @@
 import { _querySelectorClass, _querySelectorId, _querySelectorAll } from "./functions/getElements.js";
 import { todayDate } from "./functions/convertDateTopersion.js";
 import ckeditorTemplate from "./functions/ckeditorTemplate.js";
+import { insertData } from "./functions/fetchData.js";
 const selectBoxItem = _querySelectorClass('select-box-item')
 const categoryBtnLink = _querySelectorClass('category-btns a')
 const indexPhotoActiveModal = _querySelectorClass('index-photo a')
 const categoryBoxTitle = _querySelectorClass('category-box-title')
 const navTabs = _querySelectorClass('nav-tabs')
-const imagesBox = _querySelectorAll('images-box')
+const imagesBox = _querySelectorClass('images-box')
+const uploadImageBtn = _querySelectorId('upload-image-btn')
+
+
+
+
+
+
 function updateTime() {
   getDate()
   getTime()
 }
-
 
 function getDate() {
   const daySpan = _querySelectorClass('day')
@@ -22,7 +29,6 @@ function getDate() {
   monthSpan.innerHTML = todayDate.month
   yearSpan.innerHTML = todayDate.year
 }
-
 
 function getTime() {
   const secondSpan = _querySelectorClass('second')
@@ -74,46 +80,46 @@ function selectTargetItem(event) {
   subMenu.classList.remove('active')
 }
 
-function showFormAddCategory(event){
+function showFormAddCategory(event) {
   event.preventDefault()
   const categoryFormAdd = _querySelectorClass('category-form-add')
-  let isActive =  categoryFormAdd.classList.toggle('active')
+  let isActive = categoryFormAdd.classList.toggle('active')
   isActive ? event.target.innerHTML = 'بستن پنجره' : event.target.innerHTML = 'دسته بندی جدید'
 }
 
-function showModalIndexPhoto(event){
+function showModalIndexPhoto(event) {
   event.preventDefault()
   const modalIndexPhoto = _querySelectorId('modal-index-photo')
   modalIndexPhoto.classList.add('active')
-  window.scrollTo(0,0)
+  window.scrollTo(0, 0)
   const modalCloseSpan = _querySelectorClass('modal-close')
-  
+
   modalCloseSpan.addEventListener('click', () => {
     modalIndexPhoto.classList.remove('active')
   })
 }
 
-function activeTabCategory(event){
+function activeTabCategory(event) {
   event.preventDefault()
   const targetElem = event.target;
-  if(targetElem.tagName == 'A'){
+  if (targetElem.tagName == 'A') {
     const beforeTargetElem = _querySelectorClass('category-box-title a.active')
     const beforeContentTab = _querySelectorClass('category-list.active')
-    const targetContentTabId  = targetElem.dataset.target;
-    const targetContentTab = _querySelectorId(targetContentTabId) 
+    const targetContentTabId = targetElem.dataset.target;
+    const targetContentTab = _querySelectorId(targetContentTabId)
     beforeTargetElem ? beforeTargetElem.classList.remove('active') : null
     beforeContentTab ? beforeContentTab.classList.remove('active') : null
     targetElem.classList.add('active')
     targetContentTab.classList.add('active')
-    
+
   }
 }
 
-function activeModalTab(event){
-  const targetTab = event.target.tagName == 'A' ?  event.target.parentElement : event.target 
+function activeModalTab(event) {
+  const targetTab = event.target.tagName == 'A' ? event.target.parentElement : event.target
 
-  
-  if(targetTab.tagName == 'LI'){
+
+  if (targetTab.tagName == 'LI') {
     const targetContentTabId = targetTab.dataset.target
     const beforeTargetElem = _querySelectorClass('nav-tabs li.active')
     const beforeContentTab = _querySelectorClass('tab-content .tab-pane.active')
@@ -127,18 +133,36 @@ function activeModalTab(event){
   }
 }
 
-updateTime()
 
+ function uploadImage(event) {
+  const fileReader = new FileReader();
+  const targetFile = event.target.files[0]
+  if(!targetFile) return false
+  fileReader.readAsDataURL(targetFile)
+  fileReader.onload = async function(event){
+    const result = {'srcImage': event.target.result}
+    const reusltFetch = await insertData('gallery', result)
+    console.log(reusltFetch);
+    if(reusltFetch){
+      Swal.fire(
+        'موفقیت آمیز!',
+        'عکس با موفقیت به گالری اضافه شد',
+        'success'
+      )
+    }
+  }
+}
+
+updateTime()
 selectBoxItem.addEventListener('click', activeSelectBox)
 categoryBtnLink.addEventListener('click', showFormAddCategory)
 indexPhotoActiveModal.addEventListener('click', showModalIndexPhoto)
 categoryBoxTitle.addEventListener('click', activeTabCategory)
 navTabs.addEventListener('click', activeModalTab)
-imagesBox.forEach(item => {
-  item.addEventListener('click', (event) => {
-    const beforeTargetElem = _querySelectorClass('image-box.active')
-    const targetBox = event.target.tagName == 'IMG' ? event.target.parentElement : event.target
-    beforeTargetElem ? beforeTargetElem.classList.remove('active') : null
-    targetBox.classList.add('active')
-  })
+uploadImageBtn.addEventListener('change', uploadImage)
+imagesBox.addEventListener('click', (event) => {
+  const beforeTargetElem = _querySelectorClass('image-box.active')
+  const targetBox = event.target.tagName == 'IMG' ? event.target.parentElement : event.target
+  beforeTargetElem ? beforeTargetElem.classList.remove('active') : null
+  targetBox.classList.add('active')
 })
