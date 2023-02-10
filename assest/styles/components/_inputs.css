@@ -27,7 +27,8 @@
     color: var(--color-gray-3);
 }
 
-#input-file{
+
+.upload-image{
     width: 0;
     opacity: 0;
     visibility: hidden;
@@ -43,6 +44,10 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+}
+
+.custome-input-file label{
+    height: 4rem;
 }
 
 .input-box{

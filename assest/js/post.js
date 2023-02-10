@@ -1,92 +1,144 @@
+import { _querySelectorClass, _querySelectorId, _querySelectorAll } from "./functions/getElements.js";
+import { todayDate } from "./functions/convertDateTopersion.js";
+import ckeditorTemplate from "./functions/ckeditorTemplate.js";
+const selectBoxItem = _querySelectorClass('select-box-item')
+const categoryBtnLink = _querySelectorClass('category-btns a')
+const indexPhotoActiveModal = _querySelectorClass('index-photo a')
+const categoryBoxTitle = _querySelectorClass('category-box-title')
+const navTabs = _querySelectorClass('nav-tabs')
+const imagesBox = _querySelectorAll('images-box')
+function updateTime() {
+  getDate()
+  getTime()
+}
 
 
+function getDate() {
+  const daySpan = _querySelectorClass('day')
+  const monthSpan = _querySelectorClass('month')
+  const yearSpan = _querySelectorClass('year')
 
-ClassicEditor.create(document.querySelector('#editor'),{
-    language: 'fa',
-    toolbar: {
-        items: [
-            'exportPDF','exportWord', '|',
-            'findAndReplace', 'selectAll', '|',
-            'heading', '|',
-            'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
-            'bulletedList', 'numberedList', 'todoList', '|',
-            'outdent', 'indent', '|',
-            'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
-            'alignment', '|',
-            'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
-            'undo', 'redo',
+  daySpan.innerHTML = todayDate.day
+  monthSpan.innerHTML = todayDate.month
+  yearSpan.innerHTML = todayDate.year
+}
 
 
-        ],
-        shouldNotGroupWhenFull: true
-    },
-    // https://ckeditor.com/docs/ckeditor5/latest/features/headings.html#configuration
-    heading: {
-        options: [
-            { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-            { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-            { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
-            { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
-            { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
-            { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
-            { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
-        ]
-    },
-    // https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#using-the-editor-configuration
-    placeholder: 'متن خود را وارد کنید',
-    fontColor: {
-        colors: [
-            {
-                color: 'hsl(0, 0%, 0%)',
-                label: 'Black'
-            },
-            {
-                color: 'hsl(0, 0%, 30%)',
-                label: 'Dim grey'
-            },
-            {
-                color: 'hsl(0, 0%, 60%)',
-                label: 'Grey'
-            },
-            {
-                color: 'hsl(0, 0%, 90%)',
-                label: 'Light grey'
-            },
-            {
-                color: 'hsl(0, 0%, 100%)',
-                label: 'White',
-                hasBorder: true
-            },
-        ]
-    },
-    fontBackgroundColor: {
-        colors: [
-            {
-                color: 'hsl(0, 75%, 60%)',
-                label: 'Red'
-            },
-            {
-                color: 'hsl(30, 75%, 60%)',
-                label: 'Orange'
-            },
-            {
-                color: 'hsl(60, 75%, 60%)',
-                label: 'Yellow'
-            },
-            {
-                color: 'hsl(90, 75%, 60%)',
-                label: 'Light green'
-            },
-            {
-                color: 'hsl(120, 75%, 60%)',
-                label: 'Green'
-            },
-        ]
-    },
+function getTime() {
+  const secondSpan = _querySelectorClass('second')
+  const minuteSpan = _querySelectorClass('minute')
+  const hourSpan = _querySelectorClass('hour')
 
+  setInterval(function () {
+    let dateSaver = new Date();
+    let hours = dateSaver.getHours();
+    let minutes = dateSaver.getMinutes();
+    let seconds = dateSaver.getSeconds();
+
+    if (hours < 10) {
+      hours = "0" + hours;
+    }
+
+    if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+
+    hourSpan.innerHTML = hours;
+    minuteSpan.innerHTML = minutes;
+    secondSpan.innerHTML = seconds;
+  }, 1000);
+
+
+}
+
+function activeSelectBox(event) {
+  const subMenu = _querySelectorClass('select-box-menu')
+  const selectBoxMenuItem = _querySelectorAll('select-box-menu-item')
+  subMenu.classList.toggle('active')
+  console.log(selectBoxMenuItem);
+  selectBoxMenuItem.forEach(item => {
+    item.addEventListener('click', selectTargetItem)
+  });
+}
+
+function selectTargetItem(event) {
+  const subMenu = _querySelectorClass('select-box-menu')
+  const targetSelectItem = event.target.tagName == 'SPAN' ? event.target.parentElement : event.target
+  const targetElem = _querySelectorId(targetSelectItem.dataset.target)
+  const selectBoxValue = _querySelectorClass('select-box-value')
+  selectBoxValue.innerHTML = targetElem.innerHTML
+  subMenu.classList.remove('active')
+}
+
+function showFormAddCategory(event){
+  event.preventDefault()
+  const categoryFormAdd = _querySelectorClass('category-form-add')
+  let isActive =  categoryFormAdd.classList.toggle('active')
+  isActive ? event.target.innerHTML = 'بستن پنجره' : event.target.innerHTML = 'دسته بندی جدید'
+}
+
+function showModalIndexPhoto(event){
+  event.preventDefault()
+  const modalIndexPhoto = _querySelectorId('modal-index-photo')
+  modalIndexPhoto.classList.add('active')
+  window.scrollTo(0,0)
+  const modalCloseSpan = _querySelectorClass('modal-close')
+  
+  modalCloseSpan.addEventListener('click', () => {
+    modalIndexPhoto.classList.remove('active')
+  })
+}
+
+function activeTabCategory(event){
+  event.preventDefault()
+  const targetElem = event.target;
+  if(targetElem.tagName == 'A'){
+    const beforeTargetElem = _querySelectorClass('category-box-title a.active')
+    const beforeContentTab = _querySelectorClass('category-list.active')
+    const targetContentTabId  = targetElem.dataset.target;
+    const targetContentTab = _querySelectorId(targetContentTabId) 
+    beforeTargetElem ? beforeTargetElem.classList.remove('active') : null
+    beforeContentTab ? beforeContentTab.classList.remove('active') : null
+    targetElem.classList.add('active')
+    targetContentTab.classList.add('active')
+    
+  }
+}
+
+function activeModalTab(event){
+  const targetTab = event.target.tagName == 'A' ?  event.target.parentElement : event.target 
+
+  
+  if(targetTab.tagName == 'LI'){
+    const targetContentTabId = targetTab.dataset.target
+    const beforeTargetElem = _querySelectorClass('nav-tabs li.active')
+    const beforeContentTab = _querySelectorClass('tab-content .tab-pane.active')
+    const targetContentTab = _querySelectorId(targetContentTabId)
+
+    beforeTargetElem ? beforeTargetElem.classList.remove('active') : null
+    beforeContentTab ? beforeContentTab.classList.remove('active') : null
+    targetTab.classList.add('active')
+    targetContentTab.classList.add('active')
+
+  }
+}
+
+updateTime()
+
+selectBoxItem.addEventListener('click', activeSelectBox)
+categoryBtnLink.addEventListener('click', showFormAddCategory)
+indexPhotoActiveModal.addEventListener('click', showModalIndexPhoto)
+categoryBoxTitle.addEventListener('click', activeTabCategory)
+navTabs.addEventListener('click', activeModalTab)
+imagesBox.forEach(item => {
+  item.addEventListener('click', (event) => {
+    const beforeTargetElem = _querySelectorClass('image-box.active')
+    const targetBox = event.target.tagName == 'IMG' ? event.target.parentElement : event.target
+    beforeTargetElem ? beforeTargetElem.classList.remove('active') : null
+    targetBox.classList.add('active')
+  })
 })
-    .then(editor => {
-    })
-    .catch(error => {
-        console.error(error);
-    });

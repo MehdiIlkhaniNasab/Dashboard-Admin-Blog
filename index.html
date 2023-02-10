@@ -29,9 +29,27 @@
                         <button class="btn btn-blue">جستجو</button>
                     </div>
                     <div class="btns-box">
-                        <button class="btn btn-blue">1</button>
-                        <button class="btn btn-blue">2</button>
-                        <button class="btn btn-blue">3</button>
+                        <button class="btn btn-blue">
+                            <span>
+                                <svg class="icon icon-moon">
+                                    <use xlink:href="assest/images/svg/defs.svg#icon-moon"></use>
+                                </svg>
+                            </span>
+                        </button>
+                        <button class="btn btn-blue">
+                            <span>
+                                <svg class="icon icon-bell">
+                                    <use xlink:href="assest/images/svg/defs.svg#icon-bell"></use>
+                                </svg>
+                            </span>
+                        </button>
+                        <button class="btn btn-blue">
+                            <span>
+                                <svg class="icon icon-switch">
+                                    <use xlink:href="assest/images/svg/defs.svg#icon-switch"></use>
+                                </svg>
+                            </span>
+                        </button>
                     </div>
 
                 </div>
@@ -49,17 +67,17 @@
                         <div class="box-time-zone">
                             <h3 class="">تاریخ </h3>
                             <div class="date">
-                                <span class="">18</span>
-                                <span>11</span>
-                                <span>1401</span>
+                                <span class="day">18</span>
+                                <span class="month">11</span>
+                                <span class="year">1401</span>
                             </div>
                         </div>
                         <div class="box-time-zone">
                             <h3 class="">ساعت </h3>
                             <div class="time">
-                                <span class="">30</span>
-                                <span>48</span>
-                                <span>07</span>
+                                <span class="second">30</span>
+                                <span class="minute">48</span>
+                                <span class="hour">07</span>
                             </div>
                         </div>
                     </div>
@@ -152,8 +170,8 @@
                             <div class="main-content-title">
                                 <h2 class="">گالری عکس</h2>
                                 <div class="custome-input-file">
-                                    <input type="file" name="" id="input-file">
-                                    <label for="input-file" class="btn btn-blue">
+                                    <input type="file" name="" id="input-file" class="upload-image">
+                                    <label for="input-file" class="btn btn-blue ">
                                         انتخاب عکس های گالری
                                     </label>
                                 </div>
@@ -219,31 +237,31 @@
                                             <use xlink:href="assest/images/svg/defs.svg#icon-select-arrows"></use>
                                         </svg>
                                     </span>
-                                    <span>انتخاب کنید</span>
+                                    <span class="select-box-value">انتخاب کنید</span>
                                 </div>
                                 <div class="select-box-menu "> <!-- Add active class to visiable menu -->
-                                    <div class="select-box-menu-item">
+                                    <div class="select-box-menu-item" data-target="item-1">
                                         <span>
                                             <svg class="icon icon-tags">
                                                 <use xlink:href="assest/images/svg/defs.svg#icon-tags"></use>
                                             </svg>
                                         </span>
-                                        <span>پیش نویس</span>
+                                        <span id="item-1">پیش نویس</span>
                                     </div>
 
-                                    <div class="select-box-menu-item">
+                                    <div class="select-box-menu-item"  data-target="item-2">
                                         <span>
                                             <svg class="icon icon-checkmark">
                                                 <use xlink:href="assest/images/svg/defs.svg#icon-checkmark"></use>
                                             </svg>
                                         </span>
-                                        <span>مقاله اصلی</span>
+                                        <span id="item-2">مقاله اصلی</span>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="aside-left-btns">
-                                <button class="btn btn-blue">اعمال تغییرات</button>
+                                <button class="btn btn-blue">ثبت مقاله</button>
                             </div>
 
                         </div>
@@ -255,25 +273,31 @@
                         <div class="aside-left-content">
                             <div class="category-box">
                                 <div class="category-box-title">
-                                    <div class="category-box-title-right">
-                                        <a href="" class="active">همه</a>
+                                    <div class="category-box-title-right" >
+                                        <a href="" class="active" data-target="all-category">همه</a>
                                     </div>
-                                    <div class="category-box-title-left"> <!-- add active calss to enable btn -->
-                                        <a href="#" class="">استفاده نشده</a>
+                                    <div class="category-box-title-left" > <!-- add active calss to enable btn -->
+                                        <a href="#" class="" data-target="not-use-category">استفاده نشده</a>
                                     </div>
                                 </div>
                                 <div class="category-box-content">
-                                    <div class="category-list">
+                                    <div class="category-list active" id="all-category">
                                         <div class="category-item">
                                             <input type="checkbox" name="" id="category-input">
                                             <label for="category-input">دسته بندی وجود ندارد</label>
+                                        </div>
+                                    </div>
+                                    <div class="category-list" id="not-use-category">
+                                        <div class="category-item">
+                                            <input type="checkbox" name="" id="category-input-1">
+                                            <label for="category-input-1">طراحی وب</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="category-btns">
                                 <a href="#" class="">دسته بندی جدید</a>
-                                <div class="category-form-add active">
+                                <div class="category-form-add ">
                                     <input type="text" name="" class="form-control" id="" placeholder="عنوان دسته بندی">
                                     <a href="#" class="btn btn-blue">افزودن</a>
                                 </div>
@@ -310,11 +334,11 @@
 
 
     <!-- Modals -->
-    <div class="modal">
+    <div class="modal" id="modal-index-photo">
         <div class="modal-container">
             <div class="modal-title">
                 <h2 class="">گالری عکس و فیلم</h2>
-                <span>
+                <span class="modal-close">
                     <svg class="icon icon-cancel">
                         <use xlink:href="assest/images/svg/defs.svg#icon-cancel"></use>
                     </svg>
@@ -323,18 +347,17 @@
             <div class="modal-content">
                 <div class="nav-box">
                     <ul class="nav nav-tabs" id="MyTab">
-                        <li class="nav-item active" data-target="">
+                        <li class="nav-item " data-target="store-image">
                             <a href="#" class="nav-link ">کتاب خونه پرونده های چند رسانه</a>
                         </li>
-                        <li class="nav-item" data-target="">
+                        <li class="nav-item active"  data-target="upload-image">
                             <a href="#" class="nav-link">بارگذاری پرونده های چند رسانه</a>
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane active"></div>
-                        <div class="tab-pane">
+                        <div class="tab-pane " id="store-image">
                             <div class="images-box">
-                                <figure class="image-box active">
+                                <figure class="image-box">
                                     <img src="assest/images/blog/605-540x350.jpg" alt="">
                                 </figure>
                                 <figure class="image-box">
@@ -365,6 +388,29 @@
                                     <button class="btn btn-blue">تنظیم عکس شاخص</button>
                                 </div>
                             </form>
+                        </div>
+                        <div class="tab-pane active" id="upload-image">
+                            <div class="images-box">
+                                <figure class="image-box">
+                                    <img src="assest/images/blog/605-540x350.jpg" alt="">
+                                </figure>
+                                <figure class="image-box">
+                                    <img src="assest/images/blog/605-540x350.jpg" alt="">
+                                </figure>
+                                <figure class="image-box">
+                                    <img src="assest/images/blog/605-540x350.jpg" alt="">
+                                </figure>
+                                <figure class="image-box">
+                                    <img src="assest/images/blog/605-540x350.jpg" alt="">
+                                </figure>
+                            </div>
+                            <div class="upload-new-image">
+                                <h2 class="">بارگذاری پرونده های چند رسانه ای</h2>
+                                <div class="custome-input-file">
+                                    <label for="upload-image" class="btn btn-blue">بارگذاری فایل</label>
+                                    <input type="file" name="" id="upload-image" class="upload-image">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

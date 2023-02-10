@@ -7,4 +7,5 @@ body{
     font-size: var(--font-size-primary) !important;
     background-color: var(--color-gray-0);
     position: relative;
+    scroll-behavior: smooth;
 }

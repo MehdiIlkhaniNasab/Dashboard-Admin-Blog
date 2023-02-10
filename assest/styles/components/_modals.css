@@ -88,7 +88,26 @@
 }
 
 .tab-pane {
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
     display: flex;
     flex-direction: column;
     gap: 2rem;
+}
+
+.tab-pane.active{
+    opacity: 1;
+    visibility: visible;
+    height: auto;
+}
+
+.upload-new-image{
+    margin: 5rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
 }
