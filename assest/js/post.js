@@ -1,18 +1,145 @@
 import { _querySelectorClass, _querySelectorId, _querySelectorAll } from "./functions/getElements.js";
 import { todayDate } from "./functions/convertDateTopersion.js";
 import ckeditorTemplate from "./functions/ckeditorTemplate.js";
-import { insertData } from "./functions/fetchData.js";
+import { insertData, getAllData, getSingleData } from "./functions/fetchData.js";
+import { validateForm, resetForm } from "./functions/form.js";
 const selectBoxItem = _querySelectorClass('select-box-item')
 const categoryBtnLink = _querySelectorClass('category-btns a')
 const indexPhotoActiveModal = _querySelectorClass('index-photo a')
 const categoryBoxTitle = _querySelectorClass('category-box-title')
 const navTabs = _querySelectorClass('nav-tabs')
-const imagesBox = _querySelectorClass('images-box')
-const uploadImageBtn = _querySelectorId('upload-image-btn')
+const uploadImageBtnModal = _querySelectorId('upload-image-btn')
+const uploadImageBtn = _querySelectorClass
+('upload-image-galley')
+const setIndexImageBtn = _querySelectorId('set-index-image-btn')
 
 
 
+async function showImagesGalleryInPage() {
+  const iamgeBoxContainer = _querySelectorClass('main-content-images-container')
+  const imageBoxWrapper = document.createElement('div');
+  const imageBoxFragment = document.createDocumentFragment()
+  const allImageGalley = await getAllData('gallery')
+  imageBoxWrapper.classList.add('main-content-images')
+  if (allImageGalley) {
+    iamgeBoxContainer.innerHTML = ''
+    allImageGalley.forEach(image => {
+      imageBoxWrapper.insertAdjacentHTML('beforeend',
+        `<figure class="main-content-imgage">
+          <img src="${image.srcImage}" alt="" data-target="${image.id}">
+          <div class="main-content-image-delete">
+              <span>
+                  <svg class="icon icon-cancel">
+                      <use xlink:href="assest/images/svg/defs.svg#icon-cancel"></use>
+                  </svg>
+              </span>
+          </div>
+        </figure>`)
+      imageBoxFragment.append(imageBoxWrapper)
+    })
+    iamgeBoxContainer.append(imageBoxFragment)
+  }
+}
 
+
+async function getInfoIndexPhoto() {
+  const validateInputs = validateForm('index-photo-form')
+  const titleImage = _querySelectorClass('title-image-index')
+  const altImage = _querySelectorClass('alt-image-index')
+  const descriptionImage = _querySelectorClass('description-image-index')
+  const targetImage = _querySelectorClass('image-box.active img')
+  const titleImageValue = titleImage.value
+  const altImageValue = altImage.value
+  const descriptionImageValue = descriptionImage.value
+  if (validateInputs && targetImage) {
+    let targetImageId = targetImage.dataset.target
+    const srcImageTarget = await getSingleData('gallery', targetImageId)
+
+    let infoIndexImage = {
+      id: targetImageId,
+      title: titleImageValue,
+      alt: altImageValue,
+      description: descriptionImageValue,
+      srcImage: srcImageTarget[0].srcImage
+    }
+
+    return infoIndexImage
+  } else {
+    return false
+  }
+}
+
+
+async function showIndexImage(infoIndexImage) {
+  const indexImageWrapper = _querySelectorClass('aside-left-content-image-box')
+  console.log(infoIndexImage);
+  indexImageWrapper.insertAdjacentHTML('beforeend',
+    `<img src="${infoIndexImage.srcImage}" alt="" srcset="" data-target="${infoIndexImage.id}">
+  <div class="aside-left-image-delete">
+      <span>
+          <svg class="icon icon-cancel">
+              <use xlink:href="assest/images/svg/defs.svg#icon-cancel"></use>
+          </svg>
+      </span>
+  </div>`)
+}
+
+async function setImageIndexFun(event) {
+  event.preventDefault()
+  const infoIndexImage = await getInfoIndexPhoto()
+  const modalIndexPhoto = _querySelectorId('modal-index-photo')
+  const IndexPhoto = _querySelectorClass('image-box.active')
+
+  if (infoIndexImage) {
+    Swal.fire({
+      title: 'موفقیت آمیز!',
+      text: "عکس شاخص با موفقیت انتخاب شد",
+      icon: 'success',
+      confirmButtonText: 'باشه'
+    })
+    resetForm('index-photo-form')
+    modalIndexPhoto.classList.remove('active')
+    IndexPhoto.classList.remove('active')
+    showIndexImage(infoIndexImage)
+  } else {
+    Swal.fire(
+      {
+        title: 'خطا!',
+        text: "لطفا عکس را انتخاب و تمام موارد را پر کنید",
+        icon: 'error',
+        confirmButtonText: 'باشه'
+      }
+    )
+  }
+
+}
+
+async function showImagesGalleryModal() {
+  const iamgeBoxContainer = _querySelectorClass('image-box-container')
+  const imageBoxWrapper = document.createElement('div');
+  const imageBoxFragment = document.createDocumentFragment()
+  const allImageGalley = await getAllData('gallery')
+  imageBoxWrapper.classList.add('images-box')
+  if (allImageGalley) {
+    iamgeBoxContainer.innerHTML = ''
+    allImageGalley.forEach(image => {
+      imageBoxWrapper.insertAdjacentHTML('beforeend',
+        ` <figure class="image-box">
+          <img src="${image.srcImage}" alt="" data-target="${image.id}">
+          </figure>`)
+      imageBoxFragment.append(imageBoxWrapper)
+    })
+    iamgeBoxContainer.append(imageBoxFragment)
+  }
+  const imagesBox = _querySelectorClass('images-box')
+  imagesBox.addEventListener('click', (event) => {
+    const beforeTargetElem = _querySelectorClass('image-box.active')
+    const targetBox = event.target.tagName == 'IMG' ? event.target.parentElement : event.target
+    beforeTargetElem ? beforeTargetElem.classList.remove('active') : null
+    targetBox.classList.add('active')
+  })
+
+}
 
 
 function updateTime() {
@@ -134,35 +261,40 @@ function activeModalTab(event) {
 }
 
 
- function uploadImage(event) {
+function uploadImage(event) {
   const fileReader = new FileReader();
   const targetFile = event.target.files[0]
-  if(!targetFile) return false
+  if (!targetFile) return false
   fileReader.readAsDataURL(targetFile)
-  fileReader.onload = async function(event){
-    const result = {'srcImage': event.target.result}
+  fileReader.onload = async function (event) {
+    const result = { 'srcImage': event.target.result }
     const reusltFetch = await insertData('gallery', result)
-    console.log(reusltFetch);
-    if(reusltFetch){
+    if (reusltFetch) {
       Swal.fire(
         'موفقیت آمیز!',
         'عکس با موفقیت به گالری اضافه شد',
         'success'
       )
+      showImagesGalleryModal()
+      showImagesGalleryInPage()
+
     }
   }
 }
 
-updateTime()
+function loadPage() {
+  updateTime()
+  showImagesGalleryModal()
+  showImagesGalleryInPage()
+
+}
+
+window.addEventListener('load', loadPage)
 selectBoxItem.addEventListener('click', activeSelectBox)
 categoryBtnLink.addEventListener('click', showFormAddCategory)
 indexPhotoActiveModal.addEventListener('click', showModalIndexPhoto)
 categoryBoxTitle.addEventListener('click', activeTabCategory)
 navTabs.addEventListener('click', activeModalTab)
+uploadImageBtnModal.addEventListener('change', uploadImage)
 uploadImageBtn.addEventListener('change', uploadImage)
-imagesBox.addEventListener('click', (event) => {
-  const beforeTargetElem = _querySelectorClass('image-box.active')
-  const targetBox = event.target.tagName == 'IMG' ? event.target.parentElement : event.target
-  beforeTargetElem ? beforeTargetElem.classList.remove('active') : null
-  targetBox.classList.add('active')
-})
+setIndexImageBtn.addEventListener('click', setImageIndexFun)

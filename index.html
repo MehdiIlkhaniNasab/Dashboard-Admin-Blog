@@ -170,53 +170,55 @@
                             <div class="main-content-title">
                                 <h2 class="">گالری عکس</h2>
                                 <div class="custome-input-file">
-                                    <input type="file" name="" id="input-file" class="upload-image">
+                                    <input type="file" name="" id="input-file" class="upload-image upload-image-galley">
                                     <label for="input-file" class="btn btn-blue ">
                                         انتخاب عکس های گالری
                                     </label>
                                 </div>
                             </div>
-                            <div class="main-content-images">
-                                <figure class="main-content-imgage">
-                                    <img src="assest/images/blog/634-540x350.jpg" alt="">
-                                    <div class="main-content-image-delete">
-                                        <span>
-                                            <svg class="icon icon-cancel">
-                                                <use xlink:href="assest/images/svg/defs.svg#icon-cancel"></use>
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </figure>
-                                <figure class="main-content-imgage">
-                                    <img src="assest/images/blog/663-540x350.jpg" alt="">
-                                    <div class="main-content-image-delete">
-                                        <span>
-                                            <svg class="icon icon-cancel">
-                                                <use xlink:href="assest/images/svg/defs.svg#icon-cancel"></use>
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </figure>
-                                <figure class="main-content-imgage">
-                                    <img src="assest/images/blog/605-540x350.jpg" alt="">
-                                    <div class="main-content-image-delete">
-                                        <span>
-                                            <svg class="icon icon-cancel">
-                                                <use xlink:href="assest/images/svg/defs.svg#icon-cancel"></use>
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </figure>
-                                <figure class="main-content-imgage">
-                                    <img src="assest/images/blog/602-540x350.jpg" alt="">
-                                    <div class="main-content-image-delete">
-                                        <span>
-                                            <svg class="icon icon-cancel">
-                                                <use xlink:href="assest/images/svg/defs.svg#icon-cancel"></use>
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </figure>
+                            <div class="main-content-images-container">
+                                <!-- <div class="main-content-images">
+                                    <figure class="main-content-imgage">
+                                        <img src="assest/images/blog/634-540x350.jpg" alt="">
+                                        <div class="main-content-image-delete">
+                                            <span>
+                                                <svg class="icon icon-cancel">
+                                                    <use xlink:href="assest/images/svg/defs.svg#icon-cancel"></use>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </figure>
+                                    <figure class="main-content-imgage">
+                                        <img src="assest/images/blog/663-540x350.jpg" alt="">
+                                        <div class="main-content-image-delete">
+                                            <span>
+                                                <svg class="icon icon-cancel">
+                                                    <use xlink:href="assest/images/svg/defs.svg#icon-cancel"></use>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </figure>
+                                    <figure class="main-content-imgage">
+                                        <img src="assest/images/blog/605-540x350.jpg" alt="">
+                                        <div class="main-content-image-delete">
+                                            <span>
+                                                <svg class="icon icon-cancel">
+                                                    <use xlink:href="assest/images/svg/defs.svg#icon-cancel"></use>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </figure>
+                                    <figure class="main-content-imgage">
+                                        <img src="assest/images/blog/602-540x350.jpg" alt="">
+                                        <div class="main-content-image-delete">
+                                            <span>
+                                                <svg class="icon icon-cancel">
+                                                    <use xlink:href="assest/images/svg/defs.svg#icon-cancel"></use>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </figure>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -249,7 +251,7 @@
                                         <span id="item-1">پیش نویس</span>
                                     </div>
 
-                                    <div class="select-box-menu-item"  data-target="item-2">
+                                    <div class="select-box-menu-item" data-target="item-2">
                                         <span>
                                             <svg class="icon icon-checkmark">
                                                 <use xlink:href="assest/images/svg/defs.svg#icon-checkmark"></use>
@@ -273,10 +275,10 @@
                         <div class="aside-left-content">
                             <div class="category-box">
                                 <div class="category-box-title">
-                                    <div class="category-box-title-right" >
+                                    <div class="category-box-title-right">
                                         <a href="" class="active" data-target="all-category">همه</a>
                                     </div>
-                                    <div class="category-box-title-left" > <!-- add active calss to enable btn -->
+                                    <div class="category-box-title-left"> <!-- add active calss to enable btn -->
                                         <a href="#" class="" data-target="not-use-category">استفاده نشده</a>
                                     </div>
                                 </div>
@@ -298,7 +300,9 @@
                             <div class="category-btns">
                                 <a href="#" class="">دسته بندی جدید</a>
                                 <div class="category-form-add ">
-                                    <input type="text" name="" class="form-control" id="" placeholder="عنوان دسته بندی">
+                                    <input type="text" name="" class="form-control" id="" placeholder="عنوان دسته بندی"
+                                        pattern=".+" minlength="2" maxlength="30"
+                                        title="عنوان دسته بندی باید بین 2 تا سی کارکتر باشد" required>
                                     <a href="#" class="btn btn-blue">افزودن</a>
                                 </div>
                             </div>
@@ -312,14 +316,14 @@
                         </div>
                         <div class="aside-left-content">
                             <figure class="aside-left-content-image-box">
-                                <img src="assest/images/blog/602-540x350.jpg" alt="" srcset="">
+                                <!-- <img src="assest/images/blog/602-540x350.jpg" alt="" srcset="">
                                 <div class="aside-left-image-delete">
                                     <span>
                                         <svg class="icon icon-cancel">
                                             <use xlink:href="assest/images/svg/defs.svg#icon-cancel"></use>
                                         </svg>
                                     </span>
-                                </div>
+                                </div> -->
                             </figure>
                             <div class="index-photo">
                                 <a href="" class="">انتخاب عکس شاخص</a>
@@ -350,47 +354,60 @@
                         <li class="nav-item active" data-target="store-image">
                             <a href="#" class="nav-link ">کتاب خونه پرونده های چند رسانه</a>
                         </li>
-                        <li class="nav-item "  data-target="upload-image">
+                        <li class="nav-item " data-target="upload-image">
                             <a href="#" class="nav-link">بارگذاری پرونده های چند رسانه</a>
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane active" id="store-image">
-                            <div class="images-box">
-                                <figure class="image-box">
-                                    <img src="assest/images/blog/605-540x350.jpg" alt="">
-                                </figure>
-                                <figure class="image-box">
-                                    <img src="assest/images/blog/605-540x350.jpg" alt="">
-                                </figure>
-                                <figure class="image-box">
-                                    <img src="assest/images/blog/605-540x350.jpg" alt="">
-                                </figure>
-                                <figure class="image-box">
-                                    <img src="assest/images/blog/605-540x350.jpg" alt="">
-                                </figure>
+                            <div class="image-box-container">
+                                <!-- <div class="images-box">
+                                    <figure class="image-box">
+                                        <img src="assest/images/blog/605-540x350.jpg" alt="">
+                                    </figure>
+                                    <figure class="image-box">
+                                        <img src="assest/images/blog/605-540x350.jpg" alt="">
+                                    </figure>
+                                    <figure class="image-box">
+                                        <img src="assest/images/blog/605-540x350.jpg" alt="">
+                                    </figure>
+                                    <figure class="image-box">
+                                        <img src="assest/images/blog/605-540x350.jpg" alt="">
+                                    </figure>
+                                </div> -->
                             </div>
-                            <form action="#" class="form">
+                            <form action="#" class="form index-photo-form">
                                 <div class="input-box">
-                                    <label for="">عنوان</label>
-                                    <input type="text" class="form-control" placeholder="عنوان عکس">
+                                    <label for="" class="required">
+                                        <span>عنوان</span>
+                                    </label>
+                                    <input type="text" class="form-control title-image-index" placeholder="عنوان عکس"
+                                        pattern=".+" minlength="5" maxlength="30"
+                                        title="عنوان مقاله بین پنج تا سی کارکتر باشد" required>
                                 </div>
                                 <div class="input-box">
-                                    <label for="">متن alt عکس</label>
-                                    <input type="text" class="form-control" placeholder="متن alt عکس">
+                                    <label for="" class="required">
+                                        <span>متن alt عکس</span>
+                                    </label>
+                                    <input type="text" class="form-control alt-image-index" placeholder="متن alt عکس"
+                                        pattern=".+" minlength="5" maxlength="30"
+                                        title="مقدار alt بین پنج تا سی کارکتر باشد" required>
                                 </div>
                                 <div class="input-box">
-                                    <label for="">توضیحات</label>
-                                    <textarea name="" id="" cols="30" rows="10" class="form-control"
-                                        placeholder="توضیحات عکس"></textarea>
+                                    <label for="" class="required">
+                                        <span>توضیحات</span>
+                                    </label>
+                                    <textarea name="" id="" cols="30" rows="10" placeholder="توضیحات عکس" pattern=".+"
+                                        minlength="5" maxlength="100" title="توضیحات عکس باید بین پنج تا صد کارکتر باشد"
+                                        class="form-control description-image-index" required></textarea>
                                 </div>
                                 <div class="form-btns">
-                                    <button class="btn btn-blue">تنظیم عکس شاخص</button>
+                                    <button class="btn btn-blue" id="set-index-image-btn">تنظیم عکس شاخص</button>
                                 </div>
                             </form>
                         </div>
                         <div class="tab-pane " id="upload-image">
-                           
+
                             <div class="upload-new-image">
                                 <h2 class="">بارگذاری پرونده های چند رسانه ای</h2>
                                 <div class="custome-input-file">
@@ -404,7 +421,7 @@
             </div>
         </div>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="assest/js/lib/ckeditor.js"></script>
     <script src="assest/js/lib/sweetalert2.js"></script>

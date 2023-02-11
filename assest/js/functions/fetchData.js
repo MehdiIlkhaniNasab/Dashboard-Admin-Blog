@@ -11,5 +11,24 @@ async function insertData(tableName, data) {
 
     return true
 }
+async function getAllData(tableName) {
+    const { data, error } = await supabaseConfig
+        .from(tableName)
+        .select()
+    if (error && data.length == 0) return false
 
-export { insertData }
+
+    return data
+}
+async function getSingleData(tableName,id) {
+    const { data, error } = await supabaseConfig
+        .from(tableName)
+        .select()
+        .eq('id', id)
+    if (error && data.length == 0) return false
+
+
+    return data
+}
+
+export { insertData, getAllData, getSingleData }
