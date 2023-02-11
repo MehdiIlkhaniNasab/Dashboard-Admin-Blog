@@ -1,7 +1,7 @@
 import { _querySelectorClass, _querySelectorId, _querySelectorAll } from "./functions/getElements.js";
 import { todayDate } from "./functions/convertDateTopersion.js";
 import ckeditorTemplate from "./functions/ckeditorTemplate.js";
-import { insertData, getAllData, getSingleData } from "./functions/fetchData.js";
+import { insertData, getAllData, getSingleData, deleteData } from "./functions/fetchData.js";
 import { validateForm, resetForm } from "./functions/form.js";
 const selectBoxItem = _querySelectorClass('select-box-item')
 const categoryBtnLink = _querySelectorClass('category-btns a')
@@ -9,8 +9,7 @@ const indexPhotoActiveModal = _querySelectorClass('index-photo a')
 const categoryBoxTitle = _querySelectorClass('category-box-title')
 const navTabs = _querySelectorClass('nav-tabs')
 const uploadImageBtnModal = _querySelectorId('upload-image-btn')
-const uploadImageBtn = _querySelectorClass
-('upload-image-galley')
+const uploadImageBtn = _querySelectorClass('upload-image-galley')
 const setIndexImageBtn = _querySelectorId('set-index-image-btn')
 
 
@@ -28,8 +27,8 @@ async function showImagesGalleryInPage() {
         `<figure class="main-content-imgage">
           <img src="${image.srcImage}" alt="" data-target="${image.id}">
           <div class="main-content-image-delete">
-              <span>
-                  <svg class="icon icon-cancel">
+              <span data-target="${image.id}">
+                  <svg class="icon icon-cancel" data-target="${image.id}">
                       <use xlink:href="assest/images/svg/defs.svg#icon-cancel"></use>
                   </svg>
               </span>
@@ -38,6 +37,11 @@ async function showImagesGalleryInPage() {
       imageBoxFragment.append(imageBoxWrapper)
     })
     iamgeBoxContainer.append(imageBoxFragment)
+    const iconDeleteImageGallery = _querySelectorAll('main-content-image-delete span')
+
+    iconDeleteImageGallery.forEach(icon => {
+      icon.addEventListener('click', deleteImageGallery)
+    })
   }
 }
 
@@ -141,6 +145,41 @@ async function showImagesGalleryModal() {
 
 }
 
+
+ function deleteImageGallery(event) {
+   const targetElem = event.target.tagName == 'use' ? event.target.parentElement : event.target
+   const targetId = targetElem.dataset.target
+   Swal.fire({
+    title: 'آیا از حذف عکس مورد نظر مطمئن هستید؟؟',
+    text: "بعد از حذف عکس امکان برگشت آن وجود ندارد",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'بله، حذف کن',
+    cancelButtonText: 'نه'
+  }).then( async (result) => {
+    if (result.isConfirmed) {
+      const reusltFetch = await deleteData('gallery', targetId)
+      if(reusltFetch){
+        Swal.fire(
+          'حذف شد',
+          'عکس مورد نظر با موفقیت حذف شد',
+          'success'
+        )
+        showImagesGalleryModal()
+        showImagesGalleryInPage()
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title: 'اوووه',
+          text: 'مشکلی پیش اومد، لطفا دوباره تلاش کنید',
+        })
+      }
+      
+    }
+  })
+}
 
 function updateTime() {
   getDate()

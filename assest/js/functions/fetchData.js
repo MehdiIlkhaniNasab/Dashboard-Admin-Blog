@@ -11,6 +11,7 @@ async function insertData(tableName, data) {
 
     return true
 }
+
 async function getAllData(tableName) {
     const { data, error } = await supabaseConfig
         .from(tableName)
@@ -20,6 +21,7 @@ async function getAllData(tableName) {
 
     return data
 }
+
 async function getSingleData(tableName,id) {
     const { data, error } = await supabaseConfig
         .from(tableName)
@@ -30,5 +32,15 @@ async function getSingleData(tableName,id) {
 
     return data
 }
+async function deleteData(tableName,id) {
+    const { error } = await supabaseConfig
+        .from(tableName)
+        .delete()
+        .eq('id', id)
+    if (error) return false
 
-export { insertData, getAllData, getSingleData }
+
+    return true
+}
+
+export { insertData, getAllData, getSingleData , deleteData }
