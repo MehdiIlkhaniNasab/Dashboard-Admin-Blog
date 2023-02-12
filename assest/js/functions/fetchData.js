@@ -28,10 +28,18 @@ async function getSingleData(tableName,id) {
         .select()
         .eq('id', id)
     if (error && data.length == 0) return false
-
-
     return data
 }
+
+async function getSpecificData(tableName,key,value) {
+    const { data, error } = await supabaseConfig
+        .from(tableName)
+        .select()
+        .eq(key, value)
+    if (error && data.length == 0) return false
+    return data
+}
+
 async function deleteData(tableName,id) {
     const { error } = await supabaseConfig
         .from(tableName)
@@ -43,4 +51,4 @@ async function deleteData(tableName,id) {
     return true
 }
 
-export { insertData, getAllData, getSingleData , deleteData }
+export { insertData, getAllData, getSingleData , deleteData, getSpecificData }

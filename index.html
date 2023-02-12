@@ -276,23 +276,29 @@
                             <div class="category-box">
                                 <div class="category-box-title">
                                     <div class="category-box-title-right">
-                                        <a href="" class="active" data-target="all-category">همه</a>
+                                        <a href="" class="active" data-target="all-category-container">همه</a>
                                     </div>
                                     <div class="category-box-title-left"> <!-- add active calss to enable btn -->
-                                        <a href="#" class="" data-target="not-use-category">استفاده نشده</a>
+                                        <a href="#" class="" data-target="not-use-category-container">استفاده نشده</a>
                                     </div>
                                 </div>
-                                <div class="category-box-content">
-                                    <div class="category-list active" id="all-category">
-                                        <div class="category-item">
-                                            <input type="checkbox" name="" id="category-input">
-                                            <label for="category-input">دسته بندی وجود ندارد</label>
+                                <div class="category-box-content-container">
+                                    <div class="category-box-content">
+                                        <div class="category-container all-category-container active" id="all-category-container">
+                                            <!-- <div class="category-list active" id="all-category">
+                                                <div class="category-item">
+                                                    <input type="checkbox" name="" id="category-input">
+                                                    <label for="category-input">دسته بندی وجود ندارد</label>
+                                                </div>
+                                            </div> -->
                                         </div>
-                                    </div>
-                                    <div class="category-list" id="not-use-category">
-                                        <div class="category-item">
-                                            <input type="checkbox" name="" id="category-input-1">
-                                            <label for="category-input-1">طراحی وب</label>
+                                        <div class="category-container specific-category-container" id="not-use-category-container">
+                                            <!-- <div class="category-list" id="not-use-category">
+                                                <div class="category-item">
+                                                    <input type="checkbox" name="" id="category-input-1">
+                                                    <label for="category-input-1">طراحی وب</label>
+                                                </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -300,10 +306,12 @@
                             <div class="category-btns">
                                 <a href="#" class="">دسته بندی جدید</a>
                                 <div class="category-form-add ">
-                                    <input type="text" name="" class="form-control" id="" placeholder="عنوان دسته بندی"
-                                        pattern=".+" minlength="2" maxlength="30"
-                                        title="عنوان دسته بندی باید بین 2 تا سی کارکتر باشد" required>
-                                    <a href="#" class="btn btn-blue">افزودن</a>
+                                    <form action="" class="form-category">
+                                        <input type="text" name="" class="form-control" id=""
+                                            placeholder="عنوان دسته بندی" pattern=".+" minlength="2" maxlength="30"
+                                            title="عنوان دسته بندی باید بین 2 تا سی کارکتر باشد" required>
+                                    </form>
+                                    <a href="#" class="btn btn-blue  btn-add-category">افزودن</a>
                                 </div>
                             </div>
 

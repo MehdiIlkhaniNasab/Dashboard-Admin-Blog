@@ -168,21 +168,18 @@ aside{
     align-items: center;
 }
 
-.category-list{
-    height: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: start;
-    gap: 1rem;
+
+.category-container{
     opacity: 0;
     visibility: hidden;
     position: relative;
     z-index: -1;
     transition: var(--transition);
+    height: 0;
+
 }
 
-.category-list.active{
+.category-container.active{
     height: auto;
     opacity: 1;
     visibility: visible;
@@ -190,6 +187,17 @@ aside{
     padding: 2rem;
 
 }
+
+.category-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 1rem;
+
+}
+
+
 
 .category-item{
     display: flex;

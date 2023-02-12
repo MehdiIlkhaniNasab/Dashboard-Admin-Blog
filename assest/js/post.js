@@ -1,7 +1,7 @@
 import { _querySelectorClass, _querySelectorId, _querySelectorAll } from "./functions/getElements.js";
 import { todayDate } from "./functions/convertDateTopersion.js";
 import ckeditorTemplate from "./functions/ckeditorTemplate.js";
-import { insertData, getAllData, getSingleData, deleteData } from "./functions/fetchData.js";
+import { insertData, getAllData, getSingleData, deleteData, getSpecificData } from "./functions/fetchData.js";
 import { validateForm, resetForm } from "./functions/form.js";
 const selectBoxItem = _querySelectorClass('select-box-item')
 const categoryBtnLink = _querySelectorClass('category-btns a')
@@ -11,7 +11,51 @@ const navTabs = _querySelectorClass('nav-tabs')
 const uploadImageBtnModal = _querySelectorId('upload-image-btn')
 const uploadImageBtn = _querySelectorClass('upload-image-galley')
 const setIndexImageBtn = _querySelectorId('set-index-image-btn')
+const btnAddCategory = _querySelectorClass('btn-add-category')
 
+
+async function addNewCategory(event) {
+  event.preventDefault();
+  const isValidInput = validateForm('form-category')
+  const newCategoryInput = _querySelectorClass('form-category input')
+  if (isValidInput) {
+    let newCategoryInfo = {
+      title: newCategoryInput.value,
+      status: false,
+    }
+    const reusltFetch = await insertData('tags', newCategoryInfo)
+    if (reusltFetch) {
+      Swal.fire({
+        title: 'موفقیت آمیز!',
+        text: "دسته بندی جدید  با موفقیت اضافه شد",
+        icon: 'success',
+        confirmButtonText: 'باشه'
+      })
+      resetForm('form-category')
+      showAllCategory()
+      showSpecificCategory()
+
+    } else {
+      Swal.fire(
+        {
+          title: 'خطا!',
+          text: "هنگام ثبت خطا رخ داد، لطفا دوباره تلاش کنید",
+          icon: 'error',
+          confirmButtonText: 'باشه'
+        }
+      )
+    }
+  } else {
+    Swal.fire(
+      {
+        title: 'خطا!',
+        text: "لطفا   نام دسته بندی  را وارد  کنید",
+        icon: 'error',
+        confirmButtonText: 'باشه'
+      }
+    )
+  }
+}
 
 
 async function showImagesGalleryInPage() {
@@ -146,10 +190,50 @@ async function showImagesGalleryModal() {
 }
 
 
- function deleteImageGallery(event) {
-   const targetElem = event.target.tagName == 'use' ? event.target.parentElement : event.target
-   const targetId = targetElem.dataset.target
-   Swal.fire({
+async function showAllCategory() {
+  const allCategoryContainer = _querySelectorClass('all-category-container')
+  const categoryBoxContentWrapper = document.createElement('div')
+  const categoryBoxContenFragment = document.createDocumentFragment()
+  categoryBoxContentWrapper.className = 'category-list active';
+  categoryBoxContentWrapper.id = 'all-category';
+  const allCategory = await getAllData('tags')
+  allCategoryContainer.innerHTML = ''
+  allCategory.forEach(tag => {
+    categoryBoxContentWrapper.insertAdjacentHTML('beforeend', 
+    `<div class="category-item">
+        <input type="checkbox" name="" id="category-input">
+        <label for="category-input">${tag.title}</label>
+      </div>`)
+      categoryBoxContenFragment.append(categoryBoxContentWrapper)
+  })
+  allCategoryContainer.append(categoryBoxContenFragment)
+
+}
+async function showSpecificCategory() {
+  const allCategoryContainer = _querySelectorClass('specific-category-container')
+  const categoryBoxContentWrapper = document.createElement('div')
+  const categoryBoxContenFragment = document.createDocumentFragment()
+  categoryBoxContentWrapper.className = 'category-list active';
+  categoryBoxContentWrapper.id = 'not-use-category';
+  const specificCategory = await getSpecificData('tags', 'status', false)
+  console.log(specificCategory);
+  allCategoryContainer.innerHTML = ''
+  specificCategory.forEach(tag => {
+    categoryBoxContentWrapper.insertAdjacentHTML('beforeend', 
+    `<div class="category-item">
+        <input type="checkbox" name="" id="category-input">
+        <label for="category-input">${tag.title}</label>
+      </div>`)
+      categoryBoxContenFragment.append(categoryBoxContentWrapper)
+  })
+  allCategoryContainer.append(categoryBoxContenFragment)
+
+}
+
+function deleteImageGallery(event) {
+  const targetElem = event.target.tagName == 'use' ? event.target.parentElement : event.target
+  const targetId = targetElem.dataset.target
+  Swal.fire({
     title: 'آیا از حذف عکس مورد نظر مطمئن هستید؟؟',
     text: "بعد از حذف عکس امکان برگشت آن وجود ندارد",
     icon: 'warning',
@@ -158,10 +242,10 @@ async function showImagesGalleryModal() {
     cancelButtonColor: '#d33',
     confirmButtonText: 'بله، حذف کن',
     cancelButtonText: 'نه'
-  }).then( async (result) => {
+  }).then(async (result) => {
     if (result.isConfirmed) {
       const reusltFetch = await deleteData('gallery', targetId)
-      if(reusltFetch){
+      if (reusltFetch) {
         Swal.fire(
           'حذف شد',
           'عکس مورد نظر با موفقیت حذف شد',
@@ -169,14 +253,14 @@ async function showImagesGalleryModal() {
         )
         showImagesGalleryModal()
         showImagesGalleryInPage()
-      }else{
+      } else {
         Swal.fire({
           icon: 'error',
           title: 'اوووه',
           text: 'مشکلی پیش اومد، لطفا دوباره تلاش کنید',
         })
       }
-      
+
     }
   })
 }
@@ -270,14 +354,15 @@ function activeTabCategory(event) {
   const targetElem = event.target;
   if (targetElem.tagName == 'A') {
     const beforeTargetElem = _querySelectorClass('category-box-title a.active')
-    const beforeContentTab = _querySelectorClass('category-list.active')
+    const beforeContentTab = _querySelectorClass('category-container.active')
     const targetContentTabId = targetElem.dataset.target;
     const targetContentTab = _querySelectorId(targetContentTabId)
     beforeTargetElem ? beforeTargetElem.classList.remove('active') : null
     beforeContentTab ? beforeContentTab.classList.remove('active') : null
     targetElem.classList.add('active')
     targetContentTab.classList.add('active')
-
+    showAllCategory()
+    showSpecificCategory()
   }
 }
 
@@ -325,7 +410,8 @@ function loadPage() {
   updateTime()
   showImagesGalleryModal()
   showImagesGalleryInPage()
-
+  showAllCategory()
+  showSpecificCategory()
 }
 
 window.addEventListener('load', loadPage)
@@ -337,3 +423,4 @@ navTabs.addEventListener('click', activeModalTab)
 uploadImageBtnModal.addEventListener('change', uploadImage)
 uploadImageBtn.addEventListener('change', uploadImage)
 setIndexImageBtn.addEventListener('click', setImageIndexFun)
+btnAddCategory.addEventListener('click', addNewCategory)
