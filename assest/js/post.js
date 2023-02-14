@@ -1,6 +1,6 @@
 import { _querySelectorClass, _querySelectorId, _querySelectorAll } from "./functions/getElements.js";
 import { todayDate } from "./functions/convertDateTopersion.js";
-import ckeditorTemplate from "./functions/ckeditorTemplate.js";
+import {showEditor, ckeditorData} from "./functions/ckeditorTemplate.js";
 import { insertData, getAllData, getSingleData, deleteData, getSpecificData } from "./functions/fetchData.js";
 import { validateForm, resetForm } from "./functions/form.js";
 const selectBoxItem = _querySelectorClass('select-box-item')
@@ -12,6 +12,7 @@ const uploadImageBtnModal = _querySelectorId('upload-image-btn')
 const uploadImageBtn = _querySelectorClass('upload-image-galley')
 const setIndexImageBtn = _querySelectorId('set-index-image-btn')
 const btnAddCategory = _querySelectorClass('btn-add-category')
+const submitArticleBtn = _querySelectorClass('submit-article')
 
 
 async function addNewCategory(event) {
@@ -201,8 +202,8 @@ async function showAllCategory() {
   allCategory.forEach(tag => {
     categoryBoxContentWrapper.insertAdjacentHTML('beforeend', 
     `<div class="category-item">
-        <input type="checkbox" name="" id="category-input">
-        <label for="category-input">${tag.title}</label>
+        <input type="checkbox" name="" id="category-input-${tag.id}" data-title="${tag.title}">
+        <label for="category-input-${tag.id}">${tag.title}</label>
       </div>`)
       categoryBoxContenFragment.append(categoryBoxContentWrapper)
   })
@@ -216,17 +217,47 @@ async function showSpecificCategory() {
   categoryBoxContentWrapper.className = 'category-list active';
   categoryBoxContentWrapper.id = 'not-use-category';
   const specificCategory = await getSpecificData('tags', 'status', false)
-  console.log(specificCategory);
   allCategoryContainer.innerHTML = ''
   specificCategory.forEach(tag => {
     categoryBoxContentWrapper.insertAdjacentHTML('beforeend', 
     `<div class="category-item">
-        <input type="checkbox" name="" id="category-input">
-        <label for="category-input">${tag.title}</label>
+        <input type="checkbox" name=""  id="category-input-${tag.id}" data-title="${tag.title}">
+        <label for="category-input-${tag.id}">${tag.title}</label>
       </div>`)
       categoryBoxContenFragment.append(categoryBoxContentWrapper)
   })
   allCategoryContainer.append(categoryBoxContenFragment)
+
+}
+
+function saveArtivleInDB(){
+  getInfoArticle()
+}
+
+
+function getInfoArticle(){
+  const titleArticleInput = _querySelectorId('title-article-input')
+  const contentArticle = ckeditorData.getData()
+  const statusArticleElem = _querySelectorClass('select-box-value')
+  const allCategory = _querySelectorAll('all-category-container .category-list input')
+  const indexImgArticle = _querySelectorClass('aside-left-content-image-box img')
+  const indexImgSrc = indexImgArticle ? indexImgArticle.src : 'NO'
+  let tags = [];
+  allCategory.forEach(item => {
+    if(item.checked){
+      tags.push(item.dataset.title)
+    }
+  })
+  let infoArticle = {
+    title: titleArticleInput.value,
+    content: contentArticle,
+    statusArticle: statusArticleElem.innerHTML,
+    categories: tags,
+    indexImg: indexImgSrc,
+  }
+
+
+   console.log(indexImgSrc);
 
 }
 
@@ -315,7 +346,6 @@ function activeSelectBox(event) {
   const subMenu = _querySelectorClass('select-box-menu')
   const selectBoxMenuItem = _querySelectorAll('select-box-menu-item')
   subMenu.classList.toggle('active')
-  console.log(selectBoxMenuItem);
   selectBoxMenuItem.forEach(item => {
     item.addEventListener('click', selectTargetItem)
   });
@@ -407,6 +437,7 @@ function uploadImage(event) {
 }
 
 function loadPage() {
+  showEditor()
   updateTime()
   showImagesGalleryModal()
   showImagesGalleryInPage()
@@ -424,3 +455,4 @@ uploadImageBtnModal.addEventListener('change', uploadImage)
 uploadImageBtn.addEventListener('change', uploadImage)
 setIndexImageBtn.addEventListener('click', setImageIndexFun)
 btnAddCategory.addEventListener('click', addNewCategory)
+submitArticleBtn.addEventListener('click', saveArtivleInDB)
