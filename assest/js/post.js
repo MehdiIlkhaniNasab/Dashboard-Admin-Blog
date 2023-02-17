@@ -1,6 +1,6 @@
 import { _querySelectorClass, _querySelectorId, _querySelectorAll } from "./functions/getElements.js";
 import { todayDate } from "./functions/convertDateTopersion.js";
-import {showEditor, ckeditorData} from "./functions/ckeditorTemplate.js";
+import { showEditor, ckeditorData } from "./functions/ckeditorTemplate.js";
 import { insertData, getAllData, getSingleData, deleteData, getSpecificData } from "./functions/fetchData.js";
 import { validateForm, resetForm } from "./functions/form.js";
 const selectBoxItem = _querySelectorClass('select-box-item')
@@ -121,7 +121,6 @@ async function getInfoIndexPhoto() {
 
 async function showIndexImage(infoIndexImage) {
   const indexImageWrapper = _querySelectorClass('aside-left-content-image-box')
-  console.log(infoIndexImage);
   indexImageWrapper.insertAdjacentHTML('beforeend',
     `<img src="${infoIndexImage.srcImage}" alt="" srcset="" data-target="${infoIndexImage.id}">
   <div class="aside-left-image-delete">
@@ -200,12 +199,12 @@ async function showAllCategory() {
   const allCategory = await getAllData('tags')
   allCategoryContainer.innerHTML = ''
   allCategory.forEach(tag => {
-    categoryBoxContentWrapper.insertAdjacentHTML('beforeend', 
-    `<div class="category-item">
+    categoryBoxContentWrapper.insertAdjacentHTML('beforeend',
+      `<div class="category-item">
         <input type="checkbox" name="" id="category-input-${tag.id}" data-title="${tag.title}">
         <label for="category-input-${tag.id}">${tag.title}</label>
       </div>`)
-      categoryBoxContenFragment.append(categoryBoxContentWrapper)
+    categoryBoxContenFragment.append(categoryBoxContentWrapper)
   })
   allCategoryContainer.append(categoryBoxContenFragment)
 
@@ -219,23 +218,38 @@ async function showSpecificCategory() {
   const specificCategory = await getSpecificData('tags', 'status', false)
   allCategoryContainer.innerHTML = ''
   specificCategory.forEach(tag => {
-    categoryBoxContentWrapper.insertAdjacentHTML('beforeend', 
-    `<div class="category-item">
+    categoryBoxContentWrapper.insertAdjacentHTML('beforeend',
+      `<div class="category-item">
         <input type="checkbox" name=""  id="category-input-${tag.id}" data-title="${tag.title}">
         <label for="category-input-${tag.id}">${tag.title}</label>
       </div>`)
-      categoryBoxContenFragment.append(categoryBoxContentWrapper)
+    categoryBoxContenFragment.append(categoryBoxContentWrapper)
   })
   allCategoryContainer.append(categoryBoxContenFragment)
 
 }
 
-function saveArtivleInDB(){
-  getInfoArticle()
+async function saveArtivleInDB() {
+  const infoArticle = getInfoArticle()
+  if (infoArticle) {
+    const insertArticle = await insertData('articles', infoArticle)
+    if (insertArticle) {
+      Swal.fire({
+        title: 'موفقیت آمیز!',
+        text: " مقاله  با موفقیت ثبت شد",
+        icon: 'success',
+        confirmButtonText: 'باشه'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.reload()
+        }
+      })
+    }
+  }
 }
 
 
-function getInfoArticle(){
+function getInfoArticle() {
   const titleArticleInput = _querySelectorId('title-article-input')
   const contentArticle = ckeditorData.getData()
   const statusArticleElem = _querySelectorClass('select-box-value')
@@ -244,10 +258,63 @@ function getInfoArticle(){
   const indexImgSrc = indexImgArticle ? indexImgArticle.src : 'NO'
   let tags = [];
   allCategory.forEach(item => {
-    if(item.checked){
+    if (item.checked) {
       tags.push(item.dataset.title)
     }
   })
+
+
+  if (!titleArticleInput.value.trim()) {
+    Swal.fire(
+      {
+        title: 'خطا!',
+        text: "لطفا عنوان مقاله را وارد کنید",
+        icon: 'error',
+        confirmButtonText: 'باشه'
+      })
+    return false
+  }
+  if (contentArticle.length < 10) {
+    Swal.fire(
+      {
+        title: 'خطا!',
+        text: "متن مقاله  را وارد کنید",
+        icon: 'error',
+        confirmButtonText: 'باشه'
+      })
+    return false
+  }
+  if (statusArticleElem.innerHTML == 'انتخاب کنید') {
+    Swal.fire(
+      {
+        title: 'خطا!',
+        text: "وضعیت مقاله  را انتخاب کنید",
+        icon: 'error',
+        confirmButtonText: 'باشه'
+      })
+    return false
+  }
+  if (tags.length < 1) {
+    Swal.fire(
+      {
+        title: 'خطا!',
+        text: "لطفا دسته بندی مقاله  را مشخص کنید",
+        icon: 'error',
+        confirmButtonText: 'باشه'
+      })
+    return false
+  }
+  if (indexImgSrc == 'NO') {
+    Swal.fire(
+      {
+        title: 'خطا!',
+        text: "لطفا عکس شاخص مقاله  را مشخص کنید",
+        icon: 'error',
+        confirmButtonText: 'باشه'
+      })
+    return false
+  }
+
   let infoArticle = {
     title: titleArticleInput.value,
     content: contentArticle,
@@ -257,7 +324,7 @@ function getInfoArticle(){
   }
 
 
-   console.log(indexImgSrc);
+  return infoArticle
 
 }
 
